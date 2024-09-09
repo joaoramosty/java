@@ -1,0 +1,140 @@
+Discentes - Disciplina Programação Orientada a Objeto:
+TURMA : T2 - MATUTINO 
+- Diogo Manoel dos Anjos Negreiros
+- João Victor Silva Ramos
+
+//Entidade
+//Banco.java
+package entities;
+
+public class Banco {
+
+	//Atributos
+	
+		private int numConta;
+		private String dono;
+		private double saldo;
+
+
+		//Metodos Personalizados
+		
+		public void estadoConta() {
+			System.out.println("---------------------------------");
+			System.out.println("Conta: " + this.getNumConta());
+			System.out.println("Dono: " + this.getDono());
+			System.out.println("Saldo: R$ " + this.getSaldo());
+			System.out.println("---------------------------------");
+		}
+
+
+		public void depositar(double valor) {
+				System.out.println("Depósito realizado com sucesso na conta de " + getDono() + "!");
+				this.setSaldo(this.getSaldo() + valor);
+				System.out.println("O novo saldo da conta de " + getDono());
+				System.out.println(this.getSaldo());
+		}
+
+		public void sacar(double valor) {
+				if (this.saldo >= valor) {
+					System.out.println("Saque realizado com sucesso na conta de " + getDono() + "!");
+					this.setSaldo(this.getSaldo() - valor);
+					System.out.println("O novo saldo da conta de " + getDono());
+					System.out.println(this.getSaldo());
+				} else {
+					System.out.println("Saldo insuficiente.");
+				}
+
+		}
+
+		// Metodos Especiais
+		
+		public int getNumConta() {
+			return numConta;
+		}
+
+		public void setNumConta(int numConta) {
+			this.numConta = numConta;
+		}
+
+		public String getDono() {
+			return dono;
+		}
+
+		public void setDono(String dono) {
+			this.dono = dono;
+		}
+
+		public double getSaldo() {
+			return saldo;
+		}
+
+		public void setSaldo(double saldo) {
+			this.saldo = saldo;
+		}
+		
+		public Banco(int numero, String nomeTitular, double depositoInicial) {
+			this.setNumConta(numero);
+			this.setDono(nomeTitular);
+			depositar(depositoInicial);
+		}
+
+
+		public Banco(int numero, String nomeTitular) {
+			this.setNumConta(numero);
+			this.setDono(nomeTitular);
+		}
+
+		
+	}
+
+
+//ProgramaBanco.java
+package aplicacao;
+import java.util.Scanner;
+import entities.Banco;
+
+public class ProgramaBanco {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		Banco conta;
+
+		System.out.println("Informe o numero da conta: ");
+		int numero = input.nextInt();
+		System.out.println("Informe o nome do titular da conta: ");
+		input.nextLine();
+		String nomeTitular = input.nextLine();
+		System.out.println("Havera um deposito inicial (s/n)? ");
+		char resposta = input.next().charAt(0);
+		if (resposta == 's') {
+			System.out.println("Informe o valor do deposito inicial: ");
+			double depositoInicial = input.nextDouble();
+			conta = new Banco(numero, nomeTitular, depositoInicial);
+		} else {
+			conta = new Banco(numero, nomeTitular);
+		}
+
+		System.out.println();
+		conta.estadoConta();
+
+		System.out.println();
+		System.out.println("Informe um valor de Deposito: ");
+		double valor = input.nextDouble();
+		conta.depositar(valor);
+
+		System.out.println();
+		conta.estadoConta();
+
+		System.out.println();
+		System.out.println("Informe um valor de saque: ");
+		valor = input.nextDouble();
+		conta.sacar(valor);
+
+		System.out.println();
+		System.out.println("Dados da conta atualizados:");
+		conta.estadoConta();
+
+		input.close();
+	}
+}
+
+
