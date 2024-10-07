@@ -1,0 +1,5 @@
+Resposta Quarta questão :
+
+A resposta correta é C) Somente as afirmativas I, II e IV estão corretas.
+
+A III está errada porque a remoção no final de uma lista encadeada é O(n), não O(1), pois é necessário percorrer toda a lista para encontrar o último elemento.
